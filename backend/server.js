@@ -14,3 +14,10 @@ app.get("/", (req, res) => res.json({ message: "API running" }));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server on port ${PORT}`));
+
+// after app.use(express.json())
+app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/api/tickets", require("./routes/ticketRoutes"));
+
+const errorHandler = require("./middleware/errorMiddleware");
+app.use(errorHandler);
